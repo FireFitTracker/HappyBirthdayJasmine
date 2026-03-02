@@ -599,6 +599,9 @@ pinForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
   if (pinInput.value === "0302") {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
     pinGate.classList.add("unlocked");
     pinGate.setAttribute("aria-hidden", "true");
     pinFeedback.textContent = "Unlocked.";
