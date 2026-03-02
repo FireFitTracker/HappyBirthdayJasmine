@@ -511,8 +511,9 @@ main {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
-  margin-top: 1.5rem;
+  margin-top: 0.5rem;
   align-items: start;
+  grid-column: 1 / -1;
 }
 
 .memory-copy {

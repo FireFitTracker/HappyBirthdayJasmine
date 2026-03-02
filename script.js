@@ -31,7 +31,7 @@ const quizQuestions = [
   },
   {
     question: "If her aura showed up in a room, what would it look like?",
-    options: ["Soft pink with a little gold", "Lavender with silver", "Peach with white"],
+    options: ["Soft pink with a little silver", "Lavender with silver", "Peach with white"],
     answer: 0,
     success: "Obviously. Pink light with star energy."
   },
@@ -133,6 +133,7 @@ const closeLetterButton = document.getElementById("close-letter");
 const nextReasonButton = document.getElementById("next-reason");
 const reasonText = document.getElementById("reason-text");
 const timelineCards = document.querySelectorAll(".timeline-card");
+const memoryStage = document.getElementById("memory-stage");
 const memoryTitle = document.getElementById("memory-title");
 const memoryMessage = document.getElementById("memory-message");
 const swipeHint = document.getElementById("swipe-hint");
@@ -465,6 +466,7 @@ timelineCards.forEach((card) => {
   card.addEventListener("click", () => {
     timelineCards.forEach((item) => item.classList.remove("active"));
     card.classList.add("active");
+    card.insertAdjacentElement("afterend", memoryStage);
     renderMemory(card.dataset.memoryKey);
   });
 });
@@ -642,6 +644,7 @@ document.addEventListener("keydown", (event) => {
 });
 
 renderMemory("universal");
+timelineCards[0].insertAdjacentElement("afterend", memoryStage);
 renderQuiz();
 renderTracks();
 resetSecretQuestion();
