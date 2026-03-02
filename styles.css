@@ -78,9 +78,10 @@ button {
   place-items: center;
   padding: 1.5rem;
   background:
-    radial-gradient(circle at 20% 15%, rgba(255, 124, 183, 0.18), transparent 24%),
-    radial-gradient(circle at 80% 18%, rgba(182, 138, 104, 0.16), transparent 28%),
-    linear-gradient(155deg, rgba(12, 15, 19, 0.94), rgba(17, 11, 18, 0.98));
+    radial-gradient(circle at 20% 15%, rgba(255, 124, 183, 0.1), transparent 22%),
+    radial-gradient(circle at 80% 18%, rgba(182, 138, 104, 0.08), transparent 24%),
+    linear-gradient(155deg, rgba(8, 10, 14, 0.985), rgba(12, 8, 14, 0.992));
+  backdrop-filter: blur(18px);
   transition: opacity 220ms ease;
 }
 
@@ -113,8 +114,13 @@ button {
   color: var(--text);
   padding: 0.95rem 1.1rem;
   text-align: center;
-  font-size: 1.15rem;
-  letter-spacing: 0.25em;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+}
+
+.pin-input::placeholder {
+  letter-spacing: 0;
+  color: rgba(234, 220, 227, 0.7);
 }
 
 .pin-feedback {

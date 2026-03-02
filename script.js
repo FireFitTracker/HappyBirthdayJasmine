@@ -602,6 +602,7 @@ pinForm.addEventListener("submit", (event) => {
     pinGate.classList.add("unlocked");
     pinGate.setAttribute("aria-hidden", "true");
     pinFeedback.textContent = "Unlocked.";
+    burstConfetti();
     return;
   }
 
