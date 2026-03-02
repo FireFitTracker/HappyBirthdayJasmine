@@ -34,6 +34,18 @@ const quizQuestions = [
     options: ["Soft pink with a little gold", "Lavender with silver", "Peach with white"],
     answer: 0,
     success: "Obviously. Pink light with star energy."
+  },
+  {
+    question: "Which comfort-watch world feels the most like her kind of cozy?",
+    options: ["Friends", "New Girl", "Gilmore Girls"],
+    answer: 0,
+    success: "Exactly. Friends stays in the comfort-watch hall of fame."
+  },
+  {
+    question: "Which plan sounds the most like her perfect main-character night?",
+    options: ["A pop concert and a late-night city walk", "A quiet puzzle night by 8", "A camping trip with no music"],
+    answer: 0,
+    success: "Right. Big music and main-character energy wins."
   }
 ];
 
@@ -110,6 +122,10 @@ const tracks = [
 
 const openLetterButton = document.getElementById("open-letter");
 const startSurpriseButton = document.getElementById("start-surprise");
+const pinGate = document.getElementById("pin-gate");
+const pinForm = document.getElementById("pin-form");
+const pinInput = document.getElementById("pin-input");
+const pinFeedback = document.getElementById("pin-feedback");
 const letterModal = document.getElementById("letter-modal");
 const letterPanel = document.getElementById("letter-panel");
 const letterBackdrop = document.getElementById("letter-backdrop");
@@ -130,9 +146,13 @@ const secretReset = document.getElementById("secret-reset");
 const secretModal = document.getElementById("secret-modal");
 const secretBackdrop = document.getElementById("secret-backdrop");
 const closeSecretButton = document.getElementById("close-secret");
+const rewardModal = document.getElementById("reward-modal");
+const rewardBackdrop = document.getElementById("reward-backdrop");
+const closeRewardButton = document.getElementById("close-reward");
 const quizQuestion = document.getElementById("quiz-question");
 const quizOptions = document.getElementById("quiz-options");
 const quizFeedback = document.getElementById("quiz-feedback");
+const quizProgress = document.getElementById("quiz-progress");
 const nextQuestionButton = document.getElementById("next-question");
 const confettiButton = document.getElementById("confetti-button");
 const wishButton = document.getElementById("wish-button");
@@ -151,6 +171,8 @@ let reasonIndex = 0;
 let quizIndex = 0;
 let currentMemoryKey = "universal";
 let currentMemoryIndex = 0;
+let rewardUnlocked = false;
+let quizResults = new Array(quizQuestions.length).fill(null);
 
 function pad(value) {
   return String(value).padStart(2, "0");
@@ -197,6 +219,7 @@ function renderQuiz() {
   quizQuestion.textContent = current.question;
   quizOptions.innerHTML = "";
   quizFeedback.textContent = "Pick an answer to see the answer card.";
+  quizProgress.textContent = `Question ${quizIndex + 1} of ${quizQuestions.length}`;
 
   current.options.forEach((option, index) => {
     const button = document.createElement("button");
@@ -214,15 +237,20 @@ function renderQuiz() {
         optionButtons.forEach((node) => {
           node.classList.add("correct");
         });
+        quizResults[quizIndex] = true;
         quizFeedback.textContent = current.success;
+        maybeUnlockReward();
         return;
       }
 
       if (index === current.answer) {
         button.classList.add("correct");
+        quizResults[quizIndex] = true;
         quizFeedback.textContent = current.success;
+        maybeUnlockReward();
       } else {
         button.classList.add("wrong");
+        quizResults[quizIndex] = false;
         optionButtons[current.answer].classList.add("correct");
         quizFeedback.textContent = "Not quite. The right answer is the most Jasmine answer.";
       }
@@ -333,6 +361,18 @@ function closeSecretModal() {
   document.body.style.overflow = "";
 }
 
+function openRewardModal() {
+  rewardModal.classList.add("open");
+  rewardModal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+}
+
+function closeRewardModal() {
+  rewardModal.classList.remove("open");
+  rewardModal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+}
+
 function resetSecretQuestion() {
   secretOptions.forEach((button) => {
     button.disabled = false;
@@ -340,6 +380,20 @@ function resetSecretQuestion() {
   });
   secretMessage.textContent = "Pick an answer to unlock it.";
   secretReset.hidden = true;
+}
+
+function maybeUnlockReward() {
+  if (rewardUnlocked) {
+    return;
+  }
+
+  const allAnswered = quizResults.every((value) => value !== null);
+  const allCorrect = quizResults.every((value) => value === true);
+
+  if (allAnswered && allCorrect) {
+    rewardUnlocked = true;
+    openRewardModal();
+  }
 }
 
 function rainLobsters() {
@@ -382,6 +436,14 @@ closeSecretButton.addEventListener("click", () => {
 
 secretBackdrop.addEventListener("click", () => {
   closeSecretModal();
+});
+
+closeRewardButton.addEventListener("click", () => {
+  closeRewardModal();
+});
+
+rewardBackdrop.addEventListener("click", () => {
+  closeRewardModal();
 });
 
 nextReasonButton.addEventListener("click", () => {
@@ -533,12 +595,30 @@ playerProgress.addEventListener("input", () => {
   birthdayPlayer.currentTime = (Number(playerProgress.value) / 100) * birthdayPlayer.duration;
 });
 
+pinForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  if (pinInput.value === "0302") {
+    pinGate.classList.add("unlocked");
+    pinGate.setAttribute("aria-hidden", "true");
+    pinFeedback.textContent = "Unlocked.";
+    return;
+  }
+
+  pinFeedback.textContent = "Wrong pin. Try 4 digits again.";
+  pinInput.value = "";
+  pinInput.focus();
+});
+
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && letterModal.classList.contains("open")) {
     closeLetterModal();
   }
   if (event.key === "Escape" && secretModal.classList.contains("open")) {
     closeSecretModal();
+  }
+  if (event.key === "Escape" && rewardModal.classList.contains("open")) {
+    closeRewardModal();
   }
 });
 

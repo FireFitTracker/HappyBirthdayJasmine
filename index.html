@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#151118">
   <title>Happy Birthday Jas</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A9%B0%3C/text%3E%3C/svg%3E">
@@ -14,6 +17,19 @@
 <body>
   <div class="mist mist-pink"></div>
   <div class="mist mist-green"></div>
+
+  <div class="pin-gate" id="pin-gate" aria-hidden="false">
+    <div class="pin-card">
+      <p class="section-label">Private Access</p>
+      <h2>Enter Jasmine's Pin</h2>
+      <p class="support-copy">A tiny lock screen for just the two of you.</p>
+      <form class="pin-form" id="pin-form">
+        <input class="pin-input" id="pin-input" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="0302" aria-label="PIN code">
+        <button class="primary-button" type="submit">Unlock</button>
+      </form>
+      <p class="pin-feedback" id="pin-feedback">Use the four-digit pin.</p>
+    </div>
+  </div>
 
   <header class="hero">
     <p class="eyebrow">A birthday page for Jasmine</p>
@@ -63,6 +79,20 @@
         <p class="section-label">Hidden message</p>
         <h2 id="secret-title">A little secret for you</h2>
         <p class="secret-reveal" id="secret-reveal">You will always be my lobster.</p>
+      </div>
+    </section>
+  </div>
+
+  <div class="letter-modal" id="reward-modal" aria-hidden="true">
+    <div class="letter-backdrop" id="reward-backdrop"></div>
+    <section class="letter-shell secret-shell" role="dialog" aria-modal="true" aria-labelledby="reward-title">
+      <button class="letter-close" id="close-reward" type="button" aria-label="Close reward">×</button>
+      <div class="letter-top"></div>
+      <div class="letter-card">
+        <p class="section-label">Birthday reward</p>
+        <h2 id="reward-title">Quiz complete</h2>
+        <p class="reward-reveal">You've earned 1 free Book ticket.</p>
+        <p class="support-copy">Screenshot this and send it to your husband for a free book.</p>
       </div>
     </section>
   </div>
@@ -129,6 +159,7 @@
           <p class="quiz-question" id="quiz-question">What dance style feels the most Jasmine?</p>
           <div class="quiz-options" id="quiz-options"></div>
           <p class="quiz-feedback" id="quiz-feedback">Pick an answer to see the answer card.</p>
+          <p class="quiz-progress" id="quiz-progress">Question 1 of 6</p>
           <button class="secondary-button" id="next-question">Next Question</button>
         </div>
       </article>
@@ -136,7 +167,7 @@
 
     <section class="panel timeline-panel">
       <p class="section-label">Birthday memory reel</p>
-      <h2>The moments that feel like us</h2>
+      <h2>Favorite Moments</h2>
       <div class="timeline">
         <button class="timeline-card active" type="button" data-memory-key="universal">
           <span>01</span>
@@ -160,13 +191,6 @@
         </button>
       </div>
       <div class="memory-stage">
-        <div class="memory-copy">
-          <p class="memory-title" id="memory-title">Universal Studios</p>
-          <p class="memory-message" id="memory-message">
-            The kind of day that proves your version of fun is always worth following.
-          </p>
-          <p class="swipe-hint" id="swipe-hint">Tap through the photos.</p>
-        </div>
         <div class="memory-viewer">
           <button class="memory-nav prev" id="memory-prev" type="button" aria-label="Previous memory photo">‹</button>
           <div class="memory-frame">
@@ -174,6 +198,13 @@
           </div>
           <button class="memory-nav next" id="memory-next" type="button" aria-label="Next memory photo">›</button>
           <div class="memory-dots" id="memory-dots" aria-label="Memory photo navigation"></div>
+        </div>
+        <div class="memory-copy">
+          <p class="memory-title" id="memory-title">Universal Studios</p>
+          <p class="memory-message" id="memory-message">
+            The kind of day that proves your version of fun is always worth following.
+          </p>
+          <p class="swipe-hint" id="swipe-hint">Tap through the photos.</p>
         </div>
       </div>
     </section>
