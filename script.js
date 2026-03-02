@@ -12,8 +12,8 @@ const reasons = [
 const quizQuestions = [
   {
     question: "Which kind of movement feels the most like her energy?",
-    options: ["Ballet", "Jazz funk", "Contemporary"],
-    answer: 0,
+    options: ["Jazz funk", "Contemporary", "Ballet"],
+    answer: 2,
     success: "Exactly. Ballet is part of what makes you you."
   },
   {
@@ -25,26 +25,26 @@ const quizQuestions = [
   },
   {
     question: "Which movie feels the most locked-in for her?",
-    options: ["Interstellar", "The Notebook", "10 Things I Hate About You"],
-    answer: 0,
+    options: ["The Notebook", "Interstellar", "10 Things I Hate About You"],
+    answer: 1,
     success: "Right. Interstellar stays elite."
   },
   {
     question: "If her aura showed up in a room, what would it look like?",
-    options: ["Soft pink with silver", "Lavender with silver", "Peach with white"],
-    answer: 0,
+    options: ["Lavender with silver", "Peach with white", "Soft pink with silver"],
+    answer: 2,
     success: "Obviously. Pink light with star energy."
   },
   {
     question: "Which comfort-watch world feels the most like her kind of cozy?",
-    options: ["Friends", "New Girl", "Gilmore Girls"],
-    answer: 0,
+    options: ["New Girl", "Friends", "Gilmore Girls"],
+    answer: 1,
     success: "Exactly. Friends stays in the comfort-watch hall of fame."
   },
   {
     question: "Which plan sounds the most like her perfect main-character night?",
-    options: ["A pop concert and a late-night city walk", "A quiet puzzle night by 8", "A camping trip with no music"],
-    answer: 0,
+    options: ["A quiet puzzle night by 8", "A camping trip with no music", "A pop concert and a late-night city walk"],
+    answer: 2,
     success: "Right. Big music and main-character energy wins."
   }
 ];
