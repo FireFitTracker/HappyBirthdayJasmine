@@ -269,6 +269,32 @@ function renderQuiz() {
   });
 }
 
+async function playTrack(track, button = null) {
+  const encodedPath = encodeURI(track.file);
+  const sameTrack = birthdayPlayer.dataset.currentTrack === track.file;
+
+  document.querySelectorAll(".track-button").forEach((node) => node.classList.remove("active"));
+  if (button) {
+    button.classList.add("active");
+  }
+
+  if (!sameTrack) {
+    birthdayPlayer.src = encodedPath;
+    birthdayPlayer.dataset.currentTrack = track.file;
+  }
+
+  nowPlaying.textContent = `Now playing: ${track.title} by ${track.artist}`;
+
+  try {
+    await birthdayPlayer.play();
+    record.classList.add("spinning");
+    vinylPlayer.classList.add("playing");
+    playerToggle.textContent = "Pause";
+  } catch (error) {
+    nowPlaying.textContent = `Tap to play: ${track.title} by ${track.artist}`;
+  }
+}
+
 function renderTracks() {
   musicList.innerHTML = "";
 
@@ -288,28 +314,8 @@ function renderTracks() {
     button.appendChild(title);
     button.appendChild(artist);
 
-    button.addEventListener("click", async () => {
-      const encodedPath = encodeURI(track.file);
-      const sameTrack = birthdayPlayer.dataset.currentTrack === track.file;
-
-      document.querySelectorAll(".track-button").forEach((node) => node.classList.remove("active"));
-      button.classList.add("active");
-
-      if (!sameTrack) {
-        birthdayPlayer.src = encodedPath;
-        birthdayPlayer.dataset.currentTrack = track.file;
-      }
-
-      nowPlaying.textContent = `Now playing: ${track.title} by ${track.artist}`;
-
-      try {
-        await birthdayPlayer.play();
-        record.classList.add("spinning");
-        vinylPlayer.classList.add("playing");
-        playerToggle.textContent = "Pause";
-      } catch (error) {
-        nowPlaying.textContent = `Ready to play: ${track.title} by ${track.artist}`;
-      }
+    button.addEventListener("click", () => {
+      playTrack(track, button);
     });
 
     musicList.appendChild(button);
@@ -627,6 +633,7 @@ pinForm.addEventListener("submit", (event) => {
       }, 120);
     });
     burstConfetti();
+    playTrack(tracks[0], musicList.querySelector(".track-button"));
     return;
   }
 
