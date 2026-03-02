@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#151118">
+  <title>Happy Birthday Jas</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A9%B0%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="mist mist-pink"></div>
+  <div class="mist mist-green"></div>
+
+  <header class="hero">
+    <p class="eyebrow">A birthday page for Jasmine</p>
+    <h1>Happy 24th Birthday Love, you mean more than you know.</h1>
+    <p class="hero-copy">
+      Today is about celebrating your light, your humor, your beauty, your boldness,
+      and the way you make life feel brighter, funnier, and more alive.
+    </p>
+    <div class="hero-actions">
+      <button class="primary-button" id="open-letter">Open Your Birthday Letter</button>
+      <button class="secondary-button" id="start-surprise">Start Birthday Mode</button>
+    </div>
+  </header>
+
+  <div class="letter-modal" id="letter-modal" aria-hidden="true">
+    <div class="letter-backdrop" id="letter-backdrop"></div>
+    <section class="letter-shell" id="letter-panel" aria-live="polite" role="dialog" aria-modal="true" aria-labelledby="letter-title">
+      <button class="letter-close" id="close-letter" type="button" aria-label="Close birthday letter">×</button>
+      <div class="letter-top"></div>
+      <div class="letter-card">
+        <p class="section-label">Your birthday letter</p>
+        <h2 id="letter-title">A note for Jasmine</h2>
+        <p>
+          Happy Birthday, Jasmine. You are fearless, bold, funny, beautiful, and full of light.
+          You bring adventure into the room with you, and even the ordinary somehow feels more alive
+          when it gets touched by your energy.
+        </p>
+        <p>
+          This page is here to celebrate you. Your laugh, your pink world, your big ideas, your
+          sense of humor, your ballet heart, your love for pop music, and the way you make life feel
+          more fun just by being in it.
+        </p>
+        <p>
+          I hope today feels playful, special, and full of reminders that you are deeply loved.
+          You deserve a birthday that feels as bright as the way you move through life.
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <div class="letter-modal" id="secret-modal" aria-hidden="true">
+    <div class="letter-backdrop" id="secret-backdrop"></div>
+    <section class="letter-shell secret-shell" role="dialog" aria-modal="true" aria-labelledby="secret-title">
+      <button class="letter-close" id="close-secret" type="button" aria-label="Close hidden message">×</button>
+      <div class="letter-top"></div>
+      <div class="letter-card">
+        <p class="section-label">Hidden message</p>
+        <h2 id="secret-title">A little secret for you</h2>
+        <p class="secret-reveal" id="secret-reveal">You will always be my lobster.</p>
+      </div>
+    </section>
+  </div>
+
+  <main>
+    <section class="feature-grid top-grid">
+      <article class="panel hidden-panel">
+        <p class="section-label">Secret message</p>
+        <h2>One question first</h2>
+        <p class="support-copy">Answer the Friends question to unlock your hidden birthday note.</p>
+        <p class="secret-question">Who was Rachel's lobster?</p>
+        <div class="secret-options">
+          <button class="secret-option" type="button" data-correct="false">Joey</button>
+          <button class="secret-option" type="button" data-correct="true">Ross</button>
+          <button class="secret-option" type="button" data-correct="false">Chandler</button>
+        </div>
+        <p class="secret-message" id="secret-message">Pick an answer to unlock it.</p>
+        <button class="secret-reset" id="secret-reset" type="button" hidden>Try Again</button>
+      </article>
+
+      <article class="panel music-panel top-music-panel">
+        <p class="section-label">Birthday soundtrack</p>
+        <h2>Tap a song and let it play</h2>
+        <p class="support-copy">
+          A little soundtrack that feels like you.
+        </p>
+        <div class="music-list" id="music-list"></div>
+        <div class="vinyl-player" id="vinyl-player">
+          <div class="record-shell">
+            <div class="record" id="record">
+              <div class="record-ring ring-one"></div>
+              <div class="record-ring ring-two"></div>
+              <div class="record-label">J</div>
+            </div>
+            <div class="tonearm"></div>
+          </div>
+          <div class="player-meta">
+            <div class="now-playing" id="now-playing">Pick a song to start the birthday soundtrack.</div>
+            <div class="player-controls">
+              <button class="player-button" id="player-toggle" type="button">Play</button>
+              <input class="player-progress" id="player-progress" type="range" min="0" max="100" value="0" aria-label="Song progress">
+              <span class="player-time" id="player-time">0:00 / 0:00</span>
+            </div>
+          </div>
+        </div>
+        <audio id="birthday-player" preload="metadata"></audio>
+      </article>
+    </section>
+
+    <section class="feature-grid">
+      <article class="panel reasons-panel">
+        <p class="section-label">Why today is yours</p>
+        <h2>One more reason to celebrate you</h2>
+        <p class="reason-text" id="reason-text">
+          Your heart knows what matters, and your moral compass is one of the things I admire most about you.
+        </p>
+        <button class="secondary-button" id="next-reason">Show Another</button>
+      </article>
+
+      <article class="panel quiz-panel">
+        <p class="section-label">Birthday quiz</p>
+        <h2>Questions that feel like you</h2>
+        <div class="quiz-card">
+          <p class="quiz-question" id="quiz-question">What dance style feels the most Jasmine?</p>
+          <div class="quiz-options" id="quiz-options"></div>
+          <p class="quiz-feedback" id="quiz-feedback">Pick an answer to see the answer card.</p>
+          <button class="secondary-button" id="next-question">Next Question</button>
+        </div>
+      </article>
+    </section>
+
+    <section class="panel timeline-panel">
+      <p class="section-label">Birthday memory reel</p>
+      <h2>The moments that feel like us</h2>
+      <div class="timeline">
+        <button class="timeline-card active" type="button" data-memory-key="universal">
+          <span>01</span>
+          Universal
+        </button>
+        <button class="timeline-card" type="button" data-memory-key="la">
+          <span>02</span>
+          LA + Taylor
+        </button>
+        <button class="timeline-card" type="button" data-memory-key="billiebrina">
+          <span>03</span>
+          BillieBrina Day
+        </button>
+        <button class="timeline-card" type="button" data-memory-key="halloween">
+          <span>04</span>
+          Cosmo + Wanda
+        </button>
+        <button class="timeline-card" type="button" data-memory-key="nyc">
+          <span>05</span>
+          New York
+        </button>
+      </div>
+      <div class="memory-stage">
+        <div class="memory-copy">
+          <p class="memory-title" id="memory-title">Universal Studios</p>
+          <p class="memory-message" id="memory-message">
+            The kind of day that proves your version of fun is always worth following.
+          </p>
+          <p class="swipe-hint" id="swipe-hint">Tap through the photos.</p>
+        </div>
+        <div class="memory-viewer">
+          <button class="memory-nav prev" id="memory-prev" type="button" aria-label="Previous memory photo">‹</button>
+          <div class="memory-frame">
+            <img id="memory-image" src="" alt="">
+          </div>
+          <button class="memory-nav next" id="memory-next" type="button" aria-label="Next memory photo">›</button>
+          <div class="memory-dots" id="memory-dots" aria-label="Memory photo navigation"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel gallery-panel">
+      <p class="section-label">Birthday snapshots</p>
+      <h2>Favorite little frames</h2>
+      <div class="photo-grid">
+        <figure class="photo-frame">
+          <img src="PHOTOS/578EE35E-443D-49C9-800E-02D28E6F7E1A.JPG" alt="Mirror birthday snapshot">
+        </figure>
+        <figure class="photo-frame">
+          <img src="PHOTOS/A94EA26F-C0F3-44B0-8EB9-CA98EFB271ED.JPG" alt="Matching pajamas snapshot">
+        </figure>
+        <figure class="photo-frame">
+          <img src="PHOTOS/8ED5AF03-BE8C-492F-BF3C-6CBD30698888.JPG" alt="Birthday snapshot together">
+        </figure>
+        <figure class="photo-frame">
+          <img src="PHOTOS/D8DC2408-4F77-4F13-8B43-78F7FA5072B7.JPG" alt="Night out birthday snapshot">
+        </figure>
+      </div>
+    </section>
+
+    <section class="panel surprise-panel">
+      <p class="section-label">Birthday surprise</p>
+      <h2>Press for birthday chaos</h2>
+      <p class="support-copy">
+        This part is just for fun. A little celebration, a little comedy, and a little extra sparkle.
+      </p>
+      <div class="surprise-actions">
+        <button class="primary-button" id="confetti-button">Launch Birthday Magic</button>
+        <button class="secondary-button" id="wish-button">Make A Wish In The Sky</button>
+      </div>
+      <div class="wish-sky" id="wish-sky" aria-label="Interactive wish sky"></div>
+      <p class="surprise-note" id="surprise-note">Waiting for you to cause a little birthday chaos.</p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
