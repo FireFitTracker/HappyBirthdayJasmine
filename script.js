@@ -221,12 +221,15 @@ function renderMemoryImage() {
 
 function renderQuiz() {
   const current = quizQuestions[quizIndex];
+  const shuffledOptions = current.options
+    .map((option, originalIndex) => ({ option, originalIndex }))
+    .sort(() => Math.random() - 0.5);
   quizQuestion.textContent = current.question;
   quizOptions.innerHTML = "";
   quizFeedback.textContent = "Pick an answer to see the answer card.";
   quizProgress.textContent = `Question ${quizIndex + 1} of ${quizQuestions.length}`;
 
-  current.options.forEach((option, index) => {
+  shuffledOptions.forEach(({ option, originalIndex }) => {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "quiz-option";
@@ -248,7 +251,7 @@ function renderQuiz() {
         return;
       }
 
-      if (index === current.answer) {
+      if (originalIndex === current.answer) {
         button.classList.add("correct");
         quizResults[quizIndex] = true;
         quizFeedback.textContent = current.success;
@@ -256,7 +259,8 @@ function renderQuiz() {
       } else {
         button.classList.add("wrong");
         quizResults[quizIndex] = false;
-        optionButtons[current.answer].classList.add("correct");
+        const correctButtonIndex = shuffledOptions.findIndex((entry) => entry.originalIndex === current.answer);
+        optionButtons[correctButtonIndex].classList.add("correct");
         quizFeedback.textContent = "Not quite. The right answer is the most Jasmine answer.";
       }
     });
