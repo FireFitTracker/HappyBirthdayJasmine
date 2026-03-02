@@ -78,10 +78,10 @@ button {
   place-items: center;
   padding: 1.5rem;
   background:
-    radial-gradient(circle at 20% 15%, rgba(255, 124, 183, 0.1), transparent 22%),
-    radial-gradient(circle at 80% 18%, rgba(182, 138, 104, 0.08), transparent 24%),
-    linear-gradient(155deg, rgba(8, 10, 14, 0.985), rgba(12, 8, 14, 0.992));
-  backdrop-filter: blur(18px);
+    radial-gradient(circle at 20% 15%, rgba(255, 124, 183, 0.06), transparent 20%),
+    radial-gradient(circle at 80% 18%, rgba(182, 138, 104, 0.05), transparent 22%),
+    linear-gradient(155deg, rgba(5, 7, 10, 0.995), rgba(9, 7, 11, 0.998));
+  backdrop-filter: blur(24px);
   transition: opacity 220ms ease;
 }
 
@@ -91,13 +91,18 @@ button {
 }
 
 .pin-card {
-  width: min(100%, 28rem);
-  padding: 2rem;
+  width: min(100%, 25rem);
+  margin: 0 auto;
+  padding: 1.7rem;
   border-radius: 2rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(14, 20, 23, 0.9);
-  box-shadow: var(--shadow);
+  background: rgba(9, 13, 18, 0.96);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.48);
   text-align: center;
+}
+
+.pin-card h2 {
+  font-size: clamp(2rem, 8vw, 3.2rem);
 }
 
 .pin-form {
@@ -110,17 +115,18 @@ button {
   width: 100%;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.06);
   color: var(--text);
   padding: 0.95rem 1.1rem;
   text-align: center;
   font-size: 1rem;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.18em;
 }
 
 .pin-input::placeholder {
   letter-spacing: 0;
   color: rgba(234, 220, 227, 0.7);
+  font-size: 0.98rem;
 }
 
 .pin-feedback {
@@ -881,7 +887,7 @@ main {
   }
 
   .pin-card {
-    padding: 1.4rem;
+    padding: 1.25rem;
   }
 
   .hero-actions,
