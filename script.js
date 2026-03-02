@@ -174,6 +174,10 @@ let currentMemoryIndex = 0;
 let rewardUnlocked = false;
 let quizResults = new Array(quizQuestions.length).fill(null);
 
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
 function pad(value) {
   return String(value).padStart(2, "0");
 }
@@ -396,6 +400,12 @@ function maybeUnlockReward() {
   }
 }
 
+function forceScrollTop() {
+  window.scrollTo(0, 0);
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+}
+
 function rainLobsters() {
   for (let i = 0; i < 18; i += 1) {
     const lobster = document.createElement("span");
@@ -599,12 +609,17 @@ pinForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
   if (pinInput.value === "0302") {
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
+    forceScrollTop();
     pinGate.classList.add("unlocked");
     pinGate.setAttribute("aria-hidden", "true");
     pinFeedback.textContent = "Unlocked.";
+    document.body.style.overflow = "";
+    requestAnimationFrame(() => {
+      forceScrollTop();
+      window.setTimeout(() => {
+        forceScrollTop();
+      }, 120);
+    });
     burstConfetti();
     return;
   }
@@ -630,3 +645,5 @@ renderMemory("universal");
 renderQuiz();
 renderTracks();
 resetSecretQuestion();
+document.body.style.overflow = "hidden";
+forceScrollTop();
