@@ -31,7 +31,7 @@ const quizQuestions = [
   },
   {
     question: "If her aura showed up in a room, what would it look like?",
-    options: ["Soft pink with a little silver", "Lavender with silver", "Peach with white"],
+    options: ["Soft pink with silver", "Lavender with silver", "Peach with white"],
     answer: 0,
     success: "Obviously. Pink light with star energy."
   },
